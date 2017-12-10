@@ -12,7 +12,11 @@ import (
 func escapeTheMaze(offsets []int) (steps int64) {
 	for p := 0; p >= 0 && p < len(offsets); steps++ {
 		j := offsets[p]
-		offsets[p]++
+		if j >= 3 {
+			offsets[p]--
+		} else {
+			offsets[p]++
+		}
 		p += j
 	}
 	return
