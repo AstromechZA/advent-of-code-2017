@@ -4,6 +4,8 @@ import (
 	"fmt"
 )
 
+// TODO: find constant time relationship btwn value and cycle count
+
 func DataDistance(square int64) int64 {
 	if square < 1 {
 		panic("square cannot be less than 1")
