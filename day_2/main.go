@@ -31,6 +31,32 @@ func tableChecksum(input [][]int64) (sum int64) {
 	return sum
 }
 
+func rowChecksum2(input []int64) int64 {
+	li := len(input)
+	if li == 0 {
+		return 0
+	}
+	for i := 0; i < li-1; i++ {
+		for j := i + 1; j < li; j++ {
+			a, b := input[i], input[j]
+			if a >= b && a%b == 0 {
+				return a / b
+			}
+			if b > a && b%a == 0 {
+				return b / a
+			}
+		}
+	}
+	return 0
+}
+
+func tableChecksum2(input [][]int64) (sum int64) {
+	for _, row := range input {
+		sum += rowChecksum2(row)
+	}
+	return sum
+}
+
 func main() {
 	input, err := ioutil.ReadAll(bufio.NewReader(os.Stdin))
 	if err != nil {
@@ -56,4 +82,5 @@ func main() {
 		tableRows[i] = row
 	}
 	fmt.Println(tableChecksum(tableRows))
+	fmt.Println(tableChecksum2(tableRows))
 }
